@@ -45,7 +45,7 @@ async function cerrarEleccion(id) {
 
 async function asignarEscanios(eleccionId) {
   try {
-    const result = await store.asignarEscanios(eleccionId);
+    await store.asignarEscanios(eleccionId);
     alert("Escaños asignados correctamente.");
   } catch (error) {
     const message =

@@ -10,14 +10,16 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql zip
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer
 
 WORKDIR /var/www
 
-COPY . .
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-RUN composer install --no-dev --optimize-autoloader
+COPY . .
 
 EXPOSE 9000
 
-CMD ["php-fpm"]
+CMD ["/usr/local/bin/entrypoint.sh"]

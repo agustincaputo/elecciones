@@ -27,7 +27,7 @@ export const useListaStore = defineStore("listas", {
     },
 
     async crearLista() {
-      const nueva = await Lista.create({ ...this.lista });
+      await Lista.create({ ...this.lista });
       this.resetLista();
       await this.fetchListas();
     },

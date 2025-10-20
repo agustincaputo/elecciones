@@ -1,5 +1,5 @@
 <script setup>
-import { defineEmits, onMounted, ref } from 'vue'
+import { defineEmits, onMounted, defineExpose } from 'vue'
 import { useEleccionStore } from '@/stores/eleccionStore'
 import { Modal } from 'bootstrap'
 

@@ -1,5 +1,5 @@
 <script setup>
-import { defineEmits, onMounted } from "vue";
+import { defineEmits, onMounted, defineExpose } from "vue";
 import { useListaStore } from "@/stores/listaStore";
 import { useEleccionStore } from "@/stores/eleccionStore";
 import { Modal } from "bootstrap";

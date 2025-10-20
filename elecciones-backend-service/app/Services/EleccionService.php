@@ -114,6 +114,11 @@ class EleccionService
                 throw new \Exception('La elección debe tener al menos dos listas.');
             }
 
+            $totalVotos = $eleccion->listas->sum('cantidad_votos');
+            if ($totalVotos <= 0) {
+                throw new \Exception('No se puede asignar escaños: no hay votos cargados en las listas.');
+            }
+
             $this->metodoDhondt($eleccion);
 
             $eleccion->cantidad_votantes = $eleccion->listas->sum('cantidad_votos');

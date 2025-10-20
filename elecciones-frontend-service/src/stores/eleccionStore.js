@@ -23,7 +23,7 @@ export const useEleccionStore = defineStore("elecciones", {
     },
 
     async crearEleccion() {
-      const nueva = await Eleccion.create({ ...this.eleccion });
+      await Eleccion.create({ ...this.eleccion });
       this.resetEleeccion();
       this.fetchElecciones();
     },
