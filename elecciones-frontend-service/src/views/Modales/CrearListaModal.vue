@@ -34,12 +34,6 @@ async function crear() {
   cerrarModal();
 }
 
-function onSeleccionarEleccion() {
-  if (store.lista.eleccion) {
-    store.lista.eleccion_id = store.lista.eleccion.id;
-  }
-}
-
 onMounted(async () => {
   const modalEl = document.getElementById("crearListaModal");
   if (modalEl) {
@@ -99,9 +93,8 @@ defineExpose({ abrirModal });
               <label for="eleccion" class="form-label">Elección</label>
               <select
                 id="eleccion"
-                v-model="store.lista.eleccion"
+                v-model="store.lista.eleccion_id"
                 class="form-select"
-                @change="onSeleccionarEleccion"
               >
                 <option :value="null" disabled>Seleccione una elección</option>
                 <option
@@ -109,7 +102,7 @@ defineExpose({ abrirModal });
                     eleccionStore.elecciones?.data || []
                   ).filter((e) => e.estado_eleccion === 'Creada')"
                   :key="eleccion.id"
-                  :value="eleccion"
+                  :value="eleccion.id"
                 >
                   {{ eleccion.descripcion }}
                 </option>
