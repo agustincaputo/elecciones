@@ -1,5 +1,13 @@
 <script setup>
-import { defineEmits, ref, watch, onMounted, defineProps, defineExpose } from "vue";
+import {
+  defineEmits,
+  ref,
+  watch,
+  onMounted,
+  defineProps,
+  defineExpose,
+  computed,
+} from "vue";
 import { Modal } from "bootstrap";
 import { useListaStore } from "@/stores/listaStore";
 
@@ -31,6 +39,20 @@ watch(
   },
   { immediate: true }
 );
+
+const totalVotos = computed(() => {
+  return listasConVotos.value.reduce(
+    (acc, lista) => acc + (lista.cantidad_votos || 0),
+    0
+  );
+});
+
+const totalEscanios = computed(() => {
+  return listasConVotos.value.reduce(
+    (acc, lista) => acc + (lista.cantidad_escanios || 0),
+    0
+  );
+});
 
 function abrirModal() {
   if (bootstrapModal) bootstrapModal.show();
@@ -85,7 +107,7 @@ defineExpose({ abrirModal });
         <form @submit.prevent="guardarVotos">
           <div class="modal-header">
             <h5 class="modal-title" id="cargarVotosModalLabel">
-              Cargar votos para la elección "{{ eleccion?.descripcion }}"
+              Votos de la elección "{{ eleccion?.descripcion }}"
             </h5>
             <button
               type="button"
@@ -123,6 +145,15 @@ defineExpose({ abrirModal });
                 <tr v-if="listasConVotos.length === 0">
                   <td colspan="3" class="text-center">
                     No hay listas para esta elección
+                  </td>
+                </tr>
+                <tr v-if="listasConVotos.length !== 0">
+                  <td><strong>Total</strong></td>
+                  <td>
+                    <strong>{{ totalVotos }}</strong>
+                  </td>
+                  <td>
+                    <strong>{{ totalEscanios }}</strong>
                   </td>
                 </tr>
               </tbody>

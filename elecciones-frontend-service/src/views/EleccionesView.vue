@@ -82,6 +82,7 @@ function onCerrar() {}
           <th>Descripción</th>
           <th>Región</th>
           <th>Escaños a elegir</th>
+          <th>Cantidad de votantes</th>
           <th>Fecha</th>
           <th>Estado</th>
           <th>Acciones</th>
@@ -93,6 +94,7 @@ function onCerrar() {}
           <td>{{ eleccion.descripcion }}</td>
           <td>{{ eleccion.region }}</td>
           <td>{{ eleccion.cantidad_escanios }}</td>
+          <td>{{ eleccion.cantidad_votantes ?? 'Elección no finalizada' }}</td>
           <td>{{ eleccion.fecha }}</td>
           <td>{{ eleccion.estado_eleccion }}</td>
           <td>
@@ -141,7 +143,7 @@ function onCerrar() {}
         </tr>
 
         <tr v-if="(store.elecciones?.data ?? []).length === 0">
-          <td colspan="7" class="text-center">No hay elecciones cargadas</td>
+          <td colspan="8" class="text-center">No hay elecciones cargadas</td>
         </tr>
       </tbody>
     </table>
